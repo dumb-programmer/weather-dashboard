@@ -4,9 +4,9 @@ import formatTime from './utils/formatTime';
 import CitySearch from './components/CitySearch';
 import InfoCard from './components/InfoCard';
 import MainInfoCard from './components/MainInfoCard';
-import './App.css'
 import useMutation from './hooks/useMutation';
 import { getTemperature } from './api/api';
+import './App.css'
 
 function App() {
   const [data, setData] = useState(() => JSON.parse(localStorage.getItem("data") || "{}"));
@@ -29,12 +29,12 @@ function App() {
         <div className="flex gap-6">
           <MainInfoCard weather={weather} weather_description={weather_description} temp={temp} location={location} />
           <div className="flex-1 grid grid-cols-2 gap-3">
-            <InfoCard Icon={<IconPennant />} title="Wind Speed" value={`${wind} km/h`} />
-            <InfoCard Icon={<IconGauge />} title="Pressure" value={`${pressure} hPA`} />
-            <InfoCard Icon={<IconSunrise />} title="Sunrise" value={sunrise && formatTime(sunrise, timezone)} />
-            <InfoCard Icon={<IconDroplet />} title="Humidity" value={`${humidity}%`} />
-            <InfoCard Icon={<IconMist />} title="Visibility" value={`${visibility / 1000} km`} />
-            <InfoCard Icon={<IconSunset />} title="Sunset" value={sunset && formatTime(sunset, timezone)} />
+            <InfoCard Icon={<IconPennant />} title="Wind Speed" value={wind && `${wind} km/h` || "N/A"} />
+            <InfoCard Icon={<IconGauge />} title="Pressure" value={pressure && `${pressure} hPA` || "N/A"} />
+            <InfoCard Icon={<IconSunrise />} title="Sunrise" value={sunrise && sunrise && formatTime(sunrise, timezone) || "N/A"} />
+            <InfoCard Icon={<IconDroplet />} title="Humidity" value={humidity && `${humidity}%` || "N/A"} />
+            <InfoCard Icon={<IconMist />} title="Visibility" value={visibility && `${visibility / 1000} km` || "N/A"} />
+            <InfoCard Icon={<IconSunset />} title="Sunset" value={sunset && sunset && formatTime(sunset, timezone) || "N/A"} />
           </div>
         </div>
       </div>
