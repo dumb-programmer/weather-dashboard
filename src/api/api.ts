@@ -1,5 +1,3 @@
-export class InvalidCity extends Error {}
-
 export async function getTemperature(city: string) {
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${
@@ -18,13 +16,10 @@ export async function getTemperature(city: string) {
       visibility: data.visibility,
       location: data.name,
       timezone: data.timezone,
+      weather: data.weather[0].main.toLowerCase(),
+      weather_description: data.weather[0].description.toLowerCase(),
     };
   }
 
-  switch (response.status) {
-    case 404:
-      throw new InvalidCity();
-    default:
-      throw new Error();
-  }
+  throw new Error();
 }

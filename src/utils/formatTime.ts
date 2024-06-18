@@ -1,25 +1,19 @@
-import { DateTime } from "luxon";
-
 export default function formatTime(
   timestamp: number,
   timezoneOffsetInSeconds: number
 ) {
-  // Convert Unix timestamp to hours, minutes, and seconds
-  const seconds = timestamp % 60;
-  const minutes = Math.floor(timestamp / 60) % 60;
-  const hours = Math.floor(timestamp / 3600) % 24;
+  // Convert the Unix timestamp to milliseconds
+  const date = new Date(timestamp * 1000);
 
-  // Determine AM or PM suffix based on the hours
-  const period = hours < 12 ? "AM" : "PM";
+  // Calculate the offset in milliseconds
+  const offsetInMilliseconds = timezoneOffsetInSeconds * 1000;
 
-  // Convert hours from 24-hour to 12-hour format
-  let formattedHours = hours % 12;
-  formattedHours = formattedHours ? formattedHours : 12; // Handle midnight (0 hours) as 12 AM
+  // Adjust the date object by the offset
+  const adjustedDate = new Date(date.getTime() + offsetInMilliseconds);
 
-  // Format the time as HH:MM:SS AM/PM
-  const formattedTime = `${formattedHours}:${minutes
-    .toString()
-    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")} ${period}`;
+  // Format the adjusted date to HH:MM:SS
+  const hours = adjustedDate.getUTCHours().toString().padStart(2, "0");
+  const minutes = adjustedDate.getUTCMinutes().toString().padStart(2, "0");
 
-  return formattedTime;
+  return `${hours}:${minutes}`;
 }
