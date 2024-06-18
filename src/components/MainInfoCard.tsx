@@ -1,4 +1,4 @@
-import { IconCloud, IconCloudFog, IconCloudRain, IconCloudStorm, IconDroplets, IconH1, IconHaze, IconMapPin, IconMist, IconSnowflake, IconSun, IconTornado, IconWind } from "@tabler/icons-react";
+import { IconCloud, IconCloudFog, IconCloudRain, IconCloudStorm, IconDroplets, IconHaze, IconMapPin, IconMist, IconSnowflake, IconSun, IconTornado, IconWind } from "@tabler/icons-react";
 
 type MainInfoCardProps = {
     weather: string;
